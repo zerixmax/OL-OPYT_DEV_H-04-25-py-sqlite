@@ -13,7 +13,9 @@ sql_create_table = '''
 '''
 
 try:
+    conn = None
     conn = sqlite3.connect(DB_PATH)
+    print('Konekcija na bazu je otvorena')
     cursor = conn.cursor()
 
     cursor.execute(sql_create_table)
@@ -24,4 +26,6 @@ except Exception as ex:
     print(f'Dogodila se greska {ex}!')
 
 finally:
-    conn.close()
+    if conn:
+        conn.close()
+        print('Konekcija na bazu je zatvorena')
